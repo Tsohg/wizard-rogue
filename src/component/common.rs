@@ -17,3 +17,16 @@ impl ToString for Name {
         self.0.to_string()
     }
 }
+
+#[derive(Debug, Component)]
+pub struct Position {
+    pub x: i32,
+    pub y: i32,
+}
+
+#[derive(Debug, Component)]
+pub struct Renderable {
+    pub glyph: char,
+    pub fg: Color,
+    pub bg: Color,
+}

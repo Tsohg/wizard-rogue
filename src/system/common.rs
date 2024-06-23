@@ -1,10 +1,19 @@
-use crate::component::{Name, *};
+use crate::{
+    bundles,
+    component::{Name, *},
+};
 use bevy::prelude::*;
 
 pub fn spawn_entities(mut commands: Commands) {
-    commands.spawn((Player, Name::from("Ali")));
-    commands.spawn(Name::from("Labrat"));
-    commands.spawn(Name::from("Lumi"));
+    commands.spawn(bundles::PlayerBundle::default());
+    commands.spawn((
+        Position { x: 3, y: 3 },
+        Renderable {
+            glyph: 'g',
+            fg: Color::RED,
+            bg: Color::BLACK,
+        },
+    ));
 }
 
 pub fn print_player(query: Query<&Name, With<Player>>) {
