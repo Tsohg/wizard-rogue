@@ -27,10 +27,14 @@ impl Terminal {
     }
 
     pub fn put(&mut self, x: i32, y: i32, code: u8, fg: Color, bg: Color) {
-        if x < 0 || y < 0 { return }
+        if x < 0 || y < 0 {
+            return;
+        }
         let x = x as usize;
         let y = y as usize;
-        if x >= self.width() || y >= self.height() { return }
+        if x >= self.width() || y >= self.height() {
+            return;
+        }
         let index = x + y * self.width();
         if index < self.buffer.len() {
             self.buffer[index as usize] = Glyph::new(code, fg, bg)

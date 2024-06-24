@@ -80,19 +80,20 @@ impl Plugin for TerminalPlugin {
 }
 
 impl TerminalPlugin {
-
     fn get_pixels_plugin(&self) -> PixelsPlugin {
         let primary_window = Some(PixelsOptions {
             width: (self.width * self.char_width) as u32,
             height: (self.height * self.char_height) as u32,
             ..Default::default()
         });
-        PixelsPlugin { primary_window}
+        PixelsPlugin { primary_window }
     }
 }
 
 fn main_render_terminal(terminal: Res<Terminal>, mut pixels: Query<&mut PixelsWrapper>) {
-    let Ok(mut pixels) = pixels.get_single_mut() else { return };
+    let Ok(mut pixels) = pixels.get_single_mut() else {
+        return;
+    };
 
     render_terminal(terminal.into_inner(), pixels.pixels.frame_mut());
 }

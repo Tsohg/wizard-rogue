@@ -4,14 +4,14 @@ use renderer::plugin::*;
 pub mod bundles;
 pub mod component;
 pub mod renderer;
+pub mod resources;
 pub mod system;
 
 fn main() {
     App::new()
-        .add_plugins((
-            DefaultPlugins.set(window_plugin()),
-            terminal_plugin(),
-        ))
+        .add_plugins((DefaultPlugins.set(window_plugin()), terminal_plugin()))
+        .insert_resource(resources::map::Map(vec![]))
+        .add_systems(Startup, resources::map::draw_map)
         .add_systems(Startup, system::spawn_entities)
         .add_systems(Update, system::renderer::render)
         .add_systems(Update, system::player::input)
@@ -19,12 +19,12 @@ fn main() {
 }
 
 fn window_plugin() -> WindowPlugin {
-    WindowPlugin { 
+    WindowPlugin {
         primary_window: Some(Window {
             title: "Wizard Rogue".to_string(),
             resolution: WindowResolution::new(30. * 8., 30. * 8.),
             ..default()
-        }), 
+        }),
         ..default()
     }
 }
