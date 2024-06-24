@@ -1,4 +1,4 @@
-use crate::component::*;
+use crate::{component::*, renderer::color};
 use bevy::prelude::*;
 
 #[derive(Bundle)]
@@ -13,8 +13,8 @@ impl Default for PlayerBundle {
         Self {
             renderable: Renderable {
                 glyph: '@',
-                fg: Color::ALICE_BLUE,
-                bg: Color::BLACK,
+                fg: color::WHITE,
+                bg: color::BLACK,
             },
             position: Position { x: 10, y: 10 },
             player: Player {},

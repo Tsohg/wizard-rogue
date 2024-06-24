@@ -1,5 +1,7 @@
 use bevy::prelude::*;
 
+use crate::renderer::Color;
+
 #[derive(Debug, Component)]
 pub struct Player;
 

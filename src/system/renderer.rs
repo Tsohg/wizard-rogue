@@ -1,23 +1,19 @@
 use bevy::prelude::*;
-use bevy_ascii_terminal::*;
 
-use crate::component::{Position, Renderable};
+use crate::{
+    component::{Position, Renderable},
+    renderer::terminal::Terminal,
+};
 
-// Based on bevy_ascii_terminal example
-pub fn setup(mut commands: Commands) {
-    let terminal = Terminal::new([80, 60]).with_border(Border::single_line());
-
-    commands.spawn((TerminalBundle::from(terminal), AutoCamera));
-}
-
-pub fn render(objects: Query<(&Position, &Renderable)>, mut terminals: Query<&mut Terminal>) {
-    for mut terminal in terminals.iter_mut() {
-        terminal.clear();
-        for (pos, renderable) in &objects {
-            terminal.put_char(
-                [pos.x, pos.y],
-                renderable.glyph.fg(renderable.fg).bg(renderable.bg),
-            )
-        }
+pub fn render(objects: Query<(&Position, &Renderable)>, mut terminal: ResMut<Terminal>) {
+    terminal.clear();
+    for (pos, renderable) in &objects {
+        terminal.put(
+            pos.x,
+            pos.y,
+            renderable.glyph as u8,
+            renderable.fg,
+            renderable.bg,
+        )
     }
 }

@@ -9,10 +9,10 @@ pub fn input(keys: Res<ButtonInput<KeyCode>>, mut query: Query<&mut Position, Wi
         try_move_player(&mut query, 1, 0);
     }
     if keys.pressed(KeyCode::ArrowUp) {
-        try_move_player(&mut query, 0, 1);
+        try_move_player(&mut query, 0, -1);
     }
     if keys.pressed(KeyCode::ArrowDown) {
-        try_move_player(&mut query, 0, -1);
+        try_move_player(&mut query, 0, 1);
     }
 }
 
