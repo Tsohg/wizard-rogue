@@ -1,6 +1,7 @@
 use crate::{
     bundles,
     component::{Name, *},
+    renderer::color,
 };
 use bevy::prelude::*;
 
@@ -10,8 +11,8 @@ pub fn spawn_entities(mut commands: Commands) {
         Position { x: 3, y: 3 },
         Renderable {
             glyph: 'g',
-            fg: Color::RED,
-            bg: Color::BLACK,
+            fg: color::RED,
+            bg: color::BLACK,
         },
     ));
 }
