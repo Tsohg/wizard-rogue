@@ -1,5 +1,6 @@
 use bevy::{prelude::*, window::WindowResolution};
 use renderer::plugin::*;
+use resources::map;
 
 pub mod bundles;
 pub mod component;
@@ -22,7 +23,10 @@ fn window_plugin() -> WindowPlugin {
     WindowPlugin {
         primary_window: Some(Window {
             title: "Wizard Rogue".to_string(),
-            resolution: WindowResolution::new(30. * 8., 30. * 8.),
+            resolution: WindowResolution::new(
+                map::MAP_WIDTH as f32 * 8.,
+                map::MAP_HEIGHT as f32 * 8.,
+            ),
             ..default()
         }),
         ..default()
@@ -31,7 +35,7 @@ fn window_plugin() -> WindowPlugin {
 
 fn terminal_plugin() -> TerminalPlugin {
     TerminalBuilder::new()
-        .size(30, 30)
+        .size(map::MAP_WIDTH, map::MAP_HEIGHT)
         .char_size(8, 8)
         .glyphs("pastiche_8x8.png".to_string(), 16, 16)
         .build()
